@@ -1,4 +1,3 @@
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -8,15 +7,17 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-
 model Student {
-  id String @id @default(uuid())
-  name String
-  father String
-  mother String
-  birthday DateTime
-  rg String
-  cpf String
-  phone String
-  tituloEleitor String
+  id              String   @id @default(uuid())
+  name            String
+  father          String
+  mother          String
+  birthday        DateTime
+  rg              String
+  cpf             String
+  phone           String
+  tituloEleitoral String
+  email           String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }
