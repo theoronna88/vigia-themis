@@ -11,7 +11,7 @@ const StudentPage = async () => {
     name: student.name,
     father: student.father,
     mother: student.mother,
-    birthday: student.birthday,
+    birthday: student.birthday.toISOString(),
     rg: student.rg,
     cpf: student.cpf,
     phone: student.phone,
@@ -21,7 +21,9 @@ const StudentPage = async () => {
 
   return (
     <div className="container mx-auto p-4">
-      <h1 className="text-4xl font-semibold">Página de Alunos</h1>
+      <h1 className="text-4xl font-semibold text-secondary">
+        Página de Alunos
+      </h1>
 
       <div className="flex items-center justify-end mt-8">
         <StudentAddButton />

@@ -11,7 +11,6 @@ interface StudentEditButtonProps {
     email: string;
     name: string;
     phone: string;
-    address: string;
     father: string;
     mother: string;
     birthday: string;
