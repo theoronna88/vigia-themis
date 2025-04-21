@@ -9,11 +9,11 @@ const NavBar = () => {
           <a href="#" className=" hover:font-bold">
             Home
           </a>
-          <a href="#" className=" hover:font-bold">
-            About
+          <a href="/students" className=" hover:font-bold">
+            Alunos
           </a>
-          <a href="#" className=" hover:font-bold">
-            Contact
+          <a href="/courses" className=" hover:font-bold">
+            Cursos
           </a>
         </div>
       </nav>
