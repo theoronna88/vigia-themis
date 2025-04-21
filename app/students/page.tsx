@@ -1,3 +1,4 @@
+import { studentsMock } from "../_consts/students";
 import { db } from "../_lib/prisma";
 import StudentAddButton from "./components/students-add-button";
 import { columns } from "./components/students-columns";
@@ -5,8 +6,9 @@ import StudentDataTable from "./components/students-data-table";
 
 const StudentPage = async () => {
   const data = await db.student.findMany({});
+  const dataMockup = studentsMock;
 
-  const formattedData = data.map((student) => ({
+  const formattedData = dataMockup.map((student) => ({
     id: student.id,
     name: student.name,
     father: student.father,

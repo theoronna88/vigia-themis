@@ -1,6 +1,7 @@
 "use client";
 
 import { Button } from "@/app/_components/ui/button";
+import { Input } from "@/app/_components/ui/input";
 import {
   Table,
   TableBody,
@@ -13,9 +14,11 @@ import {
   ColumnDef,
   flexRender,
   getCoreRowModel,
+  getFilteredRowModel,
   getPaginationRowModel,
   useReactTable,
 } from "@tanstack/react-table";
+import { useState } from "react";
 
 interface StudentDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -26,16 +29,43 @@ const StudentDataTable = <TData, TValue>({
   columns,
   data,
 }: StudentDataTableProps<TData, TValue>) => {
-  const table = useReactTable({
+  /*const table = useReactTable({
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
+  });*/
+  const [pagination, setPagination] = useState({
+    pageIndex: 0,
+    pageSize: 10,
+  });
+  const [globalFilter, setGlobalFilter] = useState("");
+  const table = useReactTable({
+    data,
+    columns,
+    state: {
+      globalFilter,
+      pagination,
+    },
+    onGlobalFilterChange: setGlobalFilter,
+    onPaginationChange: setPagination,
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: "includesString", // padrão para texto
   });
 
   return (
     <div>
       <div>
+        <div className="flex items-center justify-between py-4">
+          <Input
+            placeholder="Buscar aluno..."
+            value={globalFilter ?? ""}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            className="max-w-sm"
+          />
+        </div>
         <div className="rounded-md border">
           <Table>
             <TableHeader>
@@ -98,6 +128,10 @@ const StudentDataTable = <TData, TValue>({
           >
             Anterior
           </Button>
+          <div className="text-sm text-muted-foreground">
+            Página {table.getState().pagination.pageIndex + 1} de{" "}
+            {table.getPageCount()}
+          </div>
           <Button
             variant="outline"
             size="sm"

@@ -26,6 +26,11 @@ export const columns: ColumnDef<{
     cell: ({ row }) => <div>{row.getValue("name")}</div>,
   },
   {
+    accessorKey: "cpf",
+    header: "CPF",
+    cell: ({ row }) => <div>{row.getValue("cpf")}</div>,
+  },
+  {
     accessorKey: "phone",
     header: "Telefone",
     cell: ({ row }) => <div>{row.getValue("phone")}</div>,
